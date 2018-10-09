@@ -11,9 +11,13 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
+
+  // dans le init on initialise la vue avec les objets qui seront affiché directement
   ngOnInit() {
     this.userService.getAll().subscribe(data => {
       this.users = data;
     });
   }
+
+  // ici méthodes pour opérations sur la vue chargée (inputs, clicks...)
 }

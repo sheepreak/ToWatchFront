@@ -8,6 +8,6 @@ export class FilmService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get('//localhost:8090/films');
+    return this.http.get('//localhost:8080/films');
   }
 }
