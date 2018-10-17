@@ -32,11 +32,11 @@ export class FilmListComponent implements OnInit {
 
     this.userService.getFilmsFromUserId(localStorage.getItem('userid')).subscribe(
       data => {
-        console.log(data);
         for (const i of this.films) {
           for (const j of data) {
             if (j.film.id === i.id) {
               this.subscribed.set(i.id, true);
+              break;
             } else {
               this.subscribed.set(i.id, false);
             }
@@ -44,9 +44,6 @@ export class FilmListComponent implements OnInit {
         }
       }
     );
-
-    console.log(this.subscribed);
-
   }
 
   subscribe(filmId: string) {

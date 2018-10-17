@@ -18,7 +18,7 @@ export class UserService {
   }
 
   subscribeToFilm(userId: string, filmId: string) {
-    return this.http.post('//localhost:8080/user/' + userId + '/films/' + filmId,
+    return this.http.post('//localhost:8080/user/' + userId + '/film/' + filmId,
       {},
       { headers: new HttpHeaders().set('Content-Type', 'application/json') });
   }
