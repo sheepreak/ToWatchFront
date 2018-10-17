@@ -10,13 +10,16 @@ import {MatButtonModule, MatCardModule, MatToolbarModule} from '@angular/materia
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     FilmListComponent,
     UserListComponent,
-    HomeComponent
+    HomeComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { HomeComponent } from './home/home.component';
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [FilmService],
   bootstrap: [AppComponent]

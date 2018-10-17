@@ -1,16 +1,30 @@
-<mat-card>
-  <mat-card-title>
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<div class="page-header">
+  <div class="jumbotron">
     <h1>{{title}}</h1>
-  </mat-card-title>
-  <mat-card-subtitle><h2>Keep track of your movies and series to watch</h2></mat-card-subtitle>
-  <mat-card-content>
-    <div class="button-row">
-      <button mat-button color="primary" routerLink="/">Home</button>
-      <button mat-button color="primary" routerLink="films">Films</button>
-      <button mat-button color="primary" routerLink="users">Users</button>
+    <h3>Keep track of your movies and series to watch</h3>
+  </div>
+  <nav class="navbar">
+    <div class="container-fluid">
+      <ul class="nav nav-pills">
+        <li><button class="btn btn-default btn-lg" routerLink="/">Home</button></li>
+        <li><button class="btn btn-default btn-lg" routerLink="films">Films</button></li>
+        <li><button class="btn btn-default btn-lg" routerLink="users">Users</button></li>
+      </ul>
+      <ul class="nav navbar-pills navbar-right">
+        <li><button *ngIf="isLoggedIn === 'false'" class="btn btn-default btn-lg" routerLink="login">Login</button>
+          <button *ngIf="isLoggedIn === 'true'" class="btn btn-default btn-lg" (click)="logout()">Logout</button></li>
+        <li><div *ngIf="isLoggedIn === 'true'" class="small">Logged in as {{username}}</div></li>
+      </ul>
     </div>
-  </mat-card-content>
-</mat-card>
+  </nav>
+</div>
 <router-outlet></router-outlet>
 
 
