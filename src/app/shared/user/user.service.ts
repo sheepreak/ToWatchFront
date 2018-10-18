@@ -18,8 +18,8 @@ export class UserService {
   }
 
   subscribeToFilm(userId: string, filmId: string) {
-    return this.http.post('//localhost:8080/user/' + userId + '/film/' + filmId,
-      {},
+    return this.http.post('//localhost:8080/user/subscribe',
+      {'userid' : userId, 'filmid' : filmId},
       { headers: new HttpHeaders().set('Content-Type', 'application/json') });
   }
 }
