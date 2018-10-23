@@ -33,40 +33,45 @@ export class FilmListComponent implements OnInit {
 
     this.filmService.getAll().subscribe(data => {
       this.films = data;
-      for (const film of this.films) {
-        this.userFilmService.countSubs(film.id).subscribe(
-          data => {
-            this.subs.set(film.id, data);
-          }, error => {}
-        );
-        this.userFilmService.countWatched(film.id).subscribe(
-          data => {
-            this.watched.set(film.id, data);
-          }, error => {}
-        );
-      }
-    });
-
-    this.userService.getFilmsFromUserId(localStorage.getItem('userid')).subscribe(
-      data => {
-        console.log(this.films);
-        for (const i of this.films) {
-          for (const j of data) {
-            if (j.film.id === i.id) {
-              this.subscribed.set(i.id, true);
-              break;
-            } else {
-              this.subscribed.set(i.id, false);
+      this.userService.getFilmsFromUserId(localStorage.getItem('userid')).subscribe(
+        data2 => {
+          console.log(this.films);
+          for (const i of this.films) {
+            for (const j of data2) {
+              if (j.film.id === i.id) {
+                this.subscribed.set(i.id, true);
+                break;
+              } else {
+                this.subscribed.set(i.id, false);
+              }
             }
           }
         }
-      }
-    );
+      );
+      this.updateCounts();
+    });
+
+
   }
 
   subscribe(filmId: string) {
     this.userService.subscribeToFilm(localStorage.getItem('userid'), filmId).subscribe(
-      data => {this.subscribed.set(filmId, true); }, error => {console.log('couldn\'t retrieve info'); }
+      data => {this.subscribed.set(filmId, true); this.updateCounts(); }, error => {console.log('couldn\'t retrieve info'); }
     );
+  }
+
+  updateCounts() {
+    for (const film of this.films) {
+      this.userFilmService.countSubs(film.id).subscribe(
+        data => {
+          this.subs.set(film.id, data);
+        }, error => {}
+      );
+      this.userFilmService.countWatched(film.id).subscribe(
+        data => {
+          this.watched.set(film.id, data);
+        }, error => {}
+      );
+    }
   }
 }
