@@ -2,5 +2,7 @@
 
 <mat-card *ngFor="let film of films">
   <div>{{film.name}}</div><button class="mat-flat-button" *ngIf="isLoggedIn && !subscribed.get(film.id)" (click)="subscribe(film.id)">subscribe</button>
-  <button class="mat-flat-button" *ngIf="isLoggedIn && subscribed.get(film.id)" disabled>already subscribed</button>
+  <button class="mat-flat-button" *ngIf="isLoggedIn && subscribed.get(film.id)" disabled>already subscribed</button><br>
+  Subs : {{subs.get(film.id)}}<br>
+  Watched : {{watched.get(film.id)}}
 </mat-card>

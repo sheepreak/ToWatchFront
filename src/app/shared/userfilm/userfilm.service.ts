@@ -17,6 +17,14 @@ export class UserfilmService {
     return this.http.get('//localhost:8080/notwatched/' + userId);
   }
 
+  countSubs(filmId: string): Observable<any> {
+    return this.http.get('//localhost:8080/countsubs/' + filmId);
+  }
+
+  countWatched(filmId: string): Observable<any> {
+    return this.http.get('//localhost:8080/countwatched/' + filmId);
+  }
+
   watch(userId: string, filmId: string) {
     return this.http.post('//localhost:8080/watch',
       {'userid' : userId, 'filmid' : filmId},

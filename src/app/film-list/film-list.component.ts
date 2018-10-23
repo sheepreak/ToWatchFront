@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FilmService} from '../shared/film/film.service';
 import {UserService} from '../shared/user/user.service';
+import {UserfilmService} from '../shared/userfilm/userfilm.service';
 
 @Component({
   selector: 'app-film-list',
@@ -9,11 +10,13 @@ import {UserService} from '../shared/user/user.service';
 })
 export class FilmListComponent implements OnInit {
   films: Array<any>;
+  subs: Map<string, number>;
+  watched: Map<string, number>;
   subscribed: Map<string, boolean>;
   isLoggedIn: boolean;
 
 
-  constructor(private filmService: FilmService, private userService: UserService) {
+  constructor(private filmService: FilmService, private userService: UserService, private userFilmService: UserfilmService) {
 
   }
 
@@ -24,14 +27,25 @@ export class FilmListComponent implements OnInit {
       this.isLoggedIn = false;
     }
 
-    this.filmService.getAll().subscribe(data => {
-      console.log(data);
-      this.films = data;
-    });
-
-    console.log(this.films);
-
+    this.subs = new Map<string, number>();
+    this.watched = new Map<string, number>();
     this.subscribed = new Map<string, boolean>();
+
+    this.filmService.getAll().subscribe(data => {
+      this.films = data;
+      for (const film of this.films) {
+        this.userFilmService.countSubs(film.id).subscribe(
+          data => {
+            this.subs.set(film.id, data);
+          }, error => {}
+        );
+        this.userFilmService.countWatched(film.id).subscribe(
+          data => {
+            this.watched.set(film.id, data);
+          }, error => {}
+        );
+      }
+    });
 
     this.userService.getFilmsFromUserId(localStorage.getItem('userid')).subscribe(
       data => {
