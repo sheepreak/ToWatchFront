@@ -18,23 +18,18 @@ export class TodoListComponent implements OnInit {
   }
 
   watch(filmid: string) {
-    this.update();
     this.userfilm.watch(localStorage.getItem('userid'), filmid).subscribe(
-      data => {console.log(data); }, error => { console.log(error); }
+      data => { this.update(); }, error => { console.log(error); }
     );
-    this.update();
   }
 
   unwatch(filmid: string) {
-    this.update();
     this.userfilm.unwatch(localStorage.getItem('userid'), filmid).subscribe(
-      data => {console.log(data); }, error => { console.log(error); }
+      data => { this.update(); }, error => { console.log(error); }
     );
-    this.update();
   }
 
   update() {
-    console.log('here');
     this.userfilm.getAllWatchedByUser(localStorage.getItem('userid')).subscribe(data => { this.watched = data; });
     this.userfilm.getAllNotWatchedByUser(localStorage.getItem('userid')).subscribe(data => { this.notWatched = data; });
   }
