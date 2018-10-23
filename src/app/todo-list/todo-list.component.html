@@ -1,0 +1,11 @@
+<h2>To watch :</h2>
+<mat-card *ngFor="let i of notWatched">
+  {{i.film.name}}
+  <button (click)="watch(i.film.id)">Watch</button>
+</mat-card>
+
+<h2>Already watched :</h2>
+<mat-card *ngFor="let i of watched">
+  {{i.film.name}}
+  <button (click)="unwatch(i.film.id)">Unwatch</button>
+</mat-card>

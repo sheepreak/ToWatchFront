@@ -25,13 +25,17 @@ export class FilmListComponent implements OnInit {
     }
 
     this.filmService.getAll().subscribe(data => {
+      console.log(data);
       this.films = data;
     });
+
+    console.log(this.films);
 
     this.subscribed = new Map<string, boolean>();
 
     this.userService.getFilmsFromUserId(localStorage.getItem('userid')).subscribe(
       data => {
+        console.log(this.films);
         for (const i of this.films) {
           for (const j of data) {
             if (j.film.id === i.id) {

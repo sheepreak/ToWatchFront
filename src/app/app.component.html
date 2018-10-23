@@ -15,7 +15,7 @@
       <ul class="nav nav-pills">
         <li><button class="btn btn-default btn-lg" routerLink="/">Home</button></li>
         <li><button class="btn btn-default btn-lg" routerLink="films">Films</button></li>
-        <li><button class="btn btn-default btn-lg" routerLink="users">Users</button></li>
+        <li><button *ngIf="isLoggedIn === 'true'" class="btn btn-default btn-lg" routerLink="todo">Todolist</button></li>
       </ul>
       <ul class="nav navbar-pills navbar-right">
         <li><button *ngIf="isLoggedIn === 'false'" class="btn btn-default btn-lg" routerLink="login">Login</button>
